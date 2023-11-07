@@ -1,0 +1,16 @@
+- [ ] Product
+    - [ ] Build dataset
+        - [ ] Get list of addresses - DAR
+        - [ ] Get address data - BBR
+        - [ ] Get address valuations - VUR
+        - [ ] Combine dataset
+    - [ ] Setup abnormality detection
+        - [ ] KNN
+        - [ ] ARD
+- [ ] Report
+    - [ ] Abstract
+    - [ ] Introduction
+    - [ ] Method
+    - [ ] Results
+    - [ ] Discussion
+    - [ ] Conclusion
