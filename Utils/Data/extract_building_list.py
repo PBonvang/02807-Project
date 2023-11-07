@@ -27,5 +27,5 @@ def extract_specific_sequence_from_json_file(outfile_name: str, start_index: int
                     if last_character_of_line == end_character:
                         break
 
-
-extract_specific_sequence_from_json_file('BuildingListBBR_FULL.json', BUILDING_LIST_LINE_NUMBER)
+if __name__ == ' __main__':
+    extract_specific_sequence_from_json_file('BuildingListBBR_FULL.json', BUILDING_LIST_LINE_NUMBER)
