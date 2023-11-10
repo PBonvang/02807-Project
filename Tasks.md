@@ -1,10 +1,10 @@
 - [ ] Product
     - [ ] Build dataset
-        - [ ] Get list of addresses - DAR
-        - [ ] Get address data - BBR
-        - [ ] Get address valuations - VUR
+        - [ ] Get list of addresses - DAR (Peter)
+        - [ ] Get address data - BBR (Thomas, Peter)
+        - [ ] Get address valuations - VUR (Long)
         - [ ] Combine dataset
-    - [ ] Setup abnormality detection
+    - [ ] Setup abnormality detection (Shadman)
         - [ ] KNN
         - [ ] ARD
 - [ ] Report
