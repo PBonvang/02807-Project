@@ -12,6 +12,10 @@ cp .env_example .env
 
 Make sure to fill in the environment file with your 'tjenestebruger' credentials
 
+## Datasets
+
+**Preprocessed DAR:** https://wetransfer.com/downloads/6bc16c4143c30995e0a1c513831ef43220231114222134/45eaf9df15d03d46a0f329a674e9292b20231114222146/8cf122?trk=TRN_TDL_01&utm_campaign=TRN_TDL_01&utm_medium=email&utm_source=sendgrid
+
 ## Requirements
 **Problem:**
 - Must use at least one, and preferably two of the topics we have discussed during the course.
