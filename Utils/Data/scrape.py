@@ -1,5 +1,6 @@
 import requests,re, sys
 import pandas as pd
+import numpy as np
 from tqdm import tqdm
 
 def property_assessment(addressID: str, verbose=False):
@@ -69,7 +70,7 @@ def scrape(idx_start:int, idx_end:int, DAR_PATH:str='DAR_joined.csv', debug=Fals
 
     output_file = f'VUR_{idx_start}_to_{idx_end}.csv'
     
-    VUR = pd.DataFrame(columns=columns.keys()).to_csv(output_file, index=False, sep=';')
+    pd.DataFrame(columns=columns.keys()).to_csv(output_file, index=False, sep=';')
 
     if debug:
         addressIDs = debug_samples
@@ -82,13 +83,20 @@ def scrape(idx_start:int, idx_end:int, DAR_PATH:str='DAR_joined.csv', debug=Fals
             source = response['hits']['hits'][0]['_source']
             taxCalculations = source.pop('taxCalculation')
             source.update({k:re.sub("[^0-9]", "", v) for k, v in taxCalculations.items()})
-            
             pd.DataFrame({key:source[key] for key in columns.keys()},index=[0]).to_csv(output_file, mode='a',index=False, header=False, sep=';')
-
         except IndexError:
             pass
-          
-    
+        
+        except KeyError as error:
+            
+            if error.args[0] == 'taxCalculation': # Basically fill tax columns with NaNs
+              for k in columns.keys():
+                pattern = re.compile(r'tax', re.IGNORECASE)
+                if pattern.search(k):
+                  source[k] = np.nan
+            pd.DataFrame({key:source[key] for key in columns.keys()},index=[0]).to_csv(output_file, mode='a',index=False, header=False, sep=';')
+                  
+        
     VUR_edit = pd.read_csv(output_file, delimiter=';')
     for col, dtype in columns.items():
         VUR_edit[col] = VUR_edit[col].astype(dtype)
@@ -97,4 +105,5 @@ def scrape(idx_start:int, idx_end:int, DAR_PATH:str='DAR_joined.csv', debug=Fals
 #scrape(r'C:\Users\Long\Desktop\Python Vault\repos\02807-Project\DAR_joined.csv',0,2,True)
 #scrape(1123328,1123332,r'C:\Users\Long\Desktop\Python Vault\repos\02807-Project\DAR_joined.csv') #Solbakkevej 68 included - test
 
+#scrape(5587,5600)
 scrape(*map(int,sys.argv[1:3]),*sys.argv[3:5]) # Run it from command line (easier like this for HPC)
