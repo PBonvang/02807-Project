@@ -2,10 +2,8 @@
 %load_ext autoreload
 %autoreload 2
 # %% Imports
-import json
 import pandas as pd
 from pathlib import Path
-from data.DAR import DAR_PATH
 
 from utils.preprocessing import get_file_metadata, json_list_to_csv
 
@@ -24,7 +22,7 @@ DAR_metadata
 ########################## DAR data to csv ##########################
 # %% HusnummerList
 json_list_to_csv(
-    DAR_PATH,
+    DAR_path,
     DAR_metadata['HusnummerList'],
     HusnummerList_path,
     attributes=[
@@ -38,7 +36,7 @@ json_list_to_csv(
 
 # %% PostnummerList
 json_list_to_csv(
-    DAR_PATH,
+    DAR_path,
     DAR_metadata['PostnummerList'],
     PostnummerList_path,
     attributes=[
@@ -49,7 +47,7 @@ json_list_to_csv(
     ])
 # %% NavngivenVejList
 json_list_to_csv(
-    DAR_PATH,
+    DAR_path,
     DAR_metadata['NavngivenVejList'],
     NavngivenVejList_path,
     attributes=[
