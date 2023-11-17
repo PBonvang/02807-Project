@@ -3,3 +3,4 @@ requests
 ipykernel
 tqdm
 pandas
+requests-ratelimiter

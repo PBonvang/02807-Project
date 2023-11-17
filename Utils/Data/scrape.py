@@ -2,6 +2,8 @@ import requests,re, sys
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
+from requests_ratelimiter import LimiterSession
+session = LimiterSession(per_second=5)
 
 def property_assessment(addressID: str, verbose=False):
     url = "https://api-fs.vurderingsportalen.dk/preliminaryproperties/_search"
@@ -38,7 +40,7 @@ def property_assessment(addressID: str, verbose=False):
         # Add other headers here if required
     }
     
-    response = requests.post(url, json=query, headers=headers)
+    response = session.post(url, json=query, headers=headers)
 
     if verbose:
         if response.status_code == 200:
