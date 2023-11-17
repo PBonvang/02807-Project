@@ -1,6 +1,6 @@
 - [ ] Product
     - [ ] Build dataset
-        - [ ] Get list of addresses - DAR (Peter)
+        - [x] Get list of addresses - DAR (Peter)
         - [ ] Get address data - BBR (Thomas, Peter)
         - [ ] Get address valuations - VUR (Long)
         - [ ] Combine dataset
