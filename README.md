@@ -1,17 +1,5 @@
 # 02807 - Project
 
-## Define environment variables
-**Windows**
-```
-copy .env_example .env
-```
-**Linux**
-```
-cp .env_example .env
-```
-
-Make sure to fill in the environment file with your 'tjenestebruger' credentials
-
 ## Datasets
 
 **Preprocessed DAR:** https://wetransfer.com/downloads/c1dce7caf5280f6964cf43d4bc40365d20231117090650/8fa5036d6cbe9e41af7385b1f38314c220231117090702/9dda2e?trk=TRN_TDL_01&utm_campaign=TRN_TDL_01&utm_medium=email&utm_source=sendgrid
