@@ -10,10 +10,13 @@ DAR_path = data_path / Path('DAR/DAR_joined.csv')
 
 # %% Load data
 BBR = pd.read_csv(BBR_path, delimiter=';', index_col=0)
-VUR = pd.read_csv(VUR_path, delimiter=';')
-DAR = pd.read_csv(DAR_path, delimiter=';')
+VUR = pd.read_csv(VUR_path, delimiter=';')\
+    .drop(columns=['id'])\
+    .rename(columns={'vurderingsaar':'evaluationYear', 'adgangsAdresseID':'id'})
+DAR = pd.read_csv(DAR_path, delimiter=';')\
+    .rename(columns={'husnummer_id':'id'})
 # %% Rename BBR columns
-BBR.rename(columns={
+DA_EN_BBR_column_map = {
     "byg021BygningensAnvendelse" : "buildingUsageType",
      "byg026Opførelsesår" : "constructionYear",
      "byg027OmTilbygningsår" : "reconstructionOrExtensionYear",
@@ -46,7 +49,39 @@ BBR.rename(columns={
      "byg070Fredning"  : "preservation",
      "byg111StormrådetsOversvømmelsesSelvrisiko": "stormCouncilsFloodSelfRisk",
      "byg130ArealAfUdvendigEfterisolering"  : "areaOfExternalInsulation",
-        "byg136PlaceringPåSøterritorie"  :     "locationOnLakeTerritory",
-}, inplace=True)
-
+    "byg136PlaceringPåSøterritorie"  :     "locationOnLakeTerritory",
+    "husnummer": "id"
+}
+BBR.rename(columns=DA_EN_BBR_column_map, inplace=True)
+BBR.drop(columns=set(BBR.columns) - set(DA_EN_BBR_column_map.values()), inplace=True)
 BBR.columns
+# %% Get the latest BBR data for a given address
+BBR_filtered = BBR.groupby('id').max('constructionYear')
+# %% Merge data
+ds = VUR.merge(DAR, how='left', on='id')\
+        .merge(BBR_filtered, how='left', on='id')
+
+ds
+# %% Save dataset
+ds.to_csv('data/DS.csv',sep=';', index=False)
+
+# %% One hot encode categorical attributes
+categorical_columns = [
+    'buildingUsageType',
+    'waterSupplyType',
+    'drainageType',
+    'outerWallMaterialType',
+    'roofMaterialType',
+    'supplementOuterWallMaterialType',
+    'supplementRoofMaterialType',
+    'asbestosHoldingMaterialType',
+    'deviantFloors',
+    'heatingInstallation',
+    'heatingMedium',
+    'supplementaryHeating',
+    'preservation',
+    'stormCouncilsFloodSelfRisk'
+]
+one_hot_ds = pd.get_dummies(ds, columns=categorical_columns)
+# %% Save one hot ds
+ds.to_csv('data/DS_with_one_hot.csv',sep=';', index=False)
