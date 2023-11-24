@@ -6,6 +6,12 @@
 
 **Code lists for one hot encoded properties:** https://teknik.bbr.dk/kodelister
 
+**VUR**
+VUR data is scraped with
+```py
+python Utils/Data/scrape.py 0 2259957
+```
+
 ## Requirements
 **Problem:**
 - Must use at least one, and preferably two of the topics we have discussed during the course.
