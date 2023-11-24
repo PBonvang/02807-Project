@@ -4,3 +4,5 @@ ipykernel
 tqdm
 pandas
 requests-ratelimiter
+scikit-learn
+matplotlib
