@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 from requests_ratelimiter import LimiterSession
-session = LimiterSession(per_second=5)
+session = LimiterSession(per_second=10)
 
 def property_assessment(addressID: str, verbose=False):
     url = "https://api-fs.vurderingsportalen.dk/preliminaryproperties/_search"
@@ -34,10 +34,8 @@ def property_assessment(addressID: str, verbose=False):
       }
     }
 
-    # Headers (if needed)
     headers = {
         "Content-Type": "application/json",
-        # Add other headers here if required
     }
     
     response = session.post(url, json=query, headers=headers)
@@ -45,7 +43,7 @@ def property_assessment(addressID: str, verbose=False):
     if verbose:
         if response.status_code == 200:
             print("Success:")
-            print(response.json())  # Or process the response as needed
+            print(response.json())
         else:
             print("Failed to fetch data:")
             print("Status code:", response.status_code)
