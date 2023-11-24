@@ -162,5 +162,5 @@ cython_debug/
 # XML
 *.xml
 
-/Data
+/[Dd]ata
 02807/
