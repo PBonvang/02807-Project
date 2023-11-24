@@ -28,8 +28,8 @@ DA_EN_BBR_column_map = {
      "byg035SupplerendeTagdækningsMateriale" : "supplementRoofMaterialType",
      "byg036AsbestholdigtMateriale" : "asbestosHoldingMaterialType",
      "byg038SamletBygningsareal" : "totalBuildingArea",
-     "byg038SamletBygningsareal" : "totalResidenceArea",
-     "byg038SamletBygningsareal" : "totalIndustrialArea",
+     "byg039BygningensSamledeBoligAreal" : "totalResidenceArea",
+     "byg040BygningensSamledeErhvervsAreal" : "totalIndustrialArea",
      "byg041BebyggetAreal"  : "builtArea",
      "byg042ArealIndbyggetGarage"  : "areaOfBuiltInGarage",
      "byg043ArealIndbyggetCarport"  : "areaOfBuiltInCarport",
@@ -59,7 +59,7 @@ BBR.columns
 BBR_filtered = BBR.groupby('id').max('constructionYear')
 # %% Merge data
 ds = VUR.merge(DAR, how='left', on='id')\
-        .merge(BBR_filtered, how='left', on='id')
+        .merge(BBR_filtered, how='inner', on='id')
 
 ds
 # %% Save dataset
@@ -82,6 +82,6 @@ categorical_columns = [
     'preservation',
     'stormCouncilsFloodSelfRisk'
 ]
-one_hot_ds = pd.get_dummies(ds, columns=categorical_columns)
+one_hot_ds = pd.get_dummies(ds, columns=categorical_columns, dtype=int)
 # %% Save one hot ds
-ds.to_csv('data/DS_with_one_hot.csv',sep=';', index=False)
+one_hot_ds.to_csv('data/DS_with_one_hot.csv',sep=';', index=False)
