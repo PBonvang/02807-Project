@@ -30,7 +30,7 @@ coef_det = poly_model.score(poly_features, total_address_values)
 print(f'[No scaling] Coefficient of determination: {coef_det}')
 
 if coef_det > 0.315:
-    with open('data/models/PolyLR_model.sav', 'wb') as f:
+    with open('data/models/PR_model.sav', 'wb') as f:
         pickle.dump(poly_model, f)
 #############################################################
 # %% Standard scaling
@@ -49,7 +49,7 @@ coef_det = poly_model.score(poly_features, total_address_values)
 print(f'[Standard scaling] Coefficient of determination: {coef_det}')
 
 if coef_det > 0.315:
-    with open('data/models/PolyLR_standard_model.sav', 'wb') as f:
+    with open('data/models/PR_standard_model.sav', 'wb') as f:
         pickle.dump(poly_model, f)
 #############################################################
 # %% MinMax scaling
@@ -68,5 +68,5 @@ coef_det = poly_model.score(poly_features, total_address_values)
 print(f'[MinMax scaling] Coefficient of determination: {coef_det}')
 
 if coef_det > 0.315:
-    with open('data/models/PolyLR_minmax_model.sav', 'wb') as f:
+    with open('data/models/PR_minmax_model.sav', 'wb') as f:
         pickle.dump(poly_model, f)
