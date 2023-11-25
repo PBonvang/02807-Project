@@ -1,8 +1,8 @@
 #!/bin/sh
 #BSUB -q hpc
-#BSUB -J DBSCAN_HP_norm
+#BSUB -J DBSCAN_HP
 #BSUB -n 4
-#BSUB -W 1:00
+#BSUB -W 3:00
 #BSUB -R "rusage[mem=16GB]"
 #BSUB -o out/JLOG_%J.out
 #BSUB -N 
