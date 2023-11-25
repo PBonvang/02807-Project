@@ -1,11 +1,10 @@
 #!/bin/sh
 #BSUB -q hpc
-#BSUB -J DBSCAN_S_mm
-#BSUB -n 16
-#BSUB -W 3:00
-#BSUB -R "rusage[mem=32GB]"
+#BSUB -J DBSCAN_HP_norm
+#BSUB -n 4
+#BSUB -W 1:00
+#BSUB -R "rusage[mem=16GB]"
 #BSUB -o out/JLOG_%J.out
-#BSUB -B
 #BSUB -N 
 
 echo '=================== Load modules: Started ==================='
@@ -20,5 +19,5 @@ source 02807/bin/activate
 echo '=================== Activate environment: Succeded ==================='
 
 echo '=================== Executing script: Start ==================='
-python3 analysis/DBSCAN_clustering.py
+python3 analysis/DBSCAN_hyperparameter_analysis.py
 echo '=================== Executing script: Succeded ===================
