@@ -22,4 +22,4 @@ dbscan.fit(feature_data)
 print('[Determining clusters] Done')
 # %% Save clusters
 db_clusterings = dbscan.labels_
-np.save(f'data/clusterings/DBSCAN_clusterings_minmax_eps{eps}_ms{min_samples}.npy', db_clusterings)
+np.save(f"data/clusterings/DBSCAN_clusterings_minmax_eps{str(eps).replace('.','_')}_ms{min_samples}.npy", db_clusterings)
