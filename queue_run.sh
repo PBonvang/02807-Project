@@ -1,10 +1,12 @@
 #!/bin/sh
 #BSUB -q hpc
 #BSUB -J DBSCAN
-#BSUB -n 16
+#BSUB -n 12
 #BSUB -W 4:00
-#BSUB -R "rusage[mem=32GB]"
+#BSUB -R "rusage[mem=64GB]"
 #BSUB -o out/JLOG_%J.out
+#BSUB -B
+#BSUB -N 
 
 echo '=================== Load modules: Started ==================='
 module load python3
