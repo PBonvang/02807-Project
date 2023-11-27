@@ -102,8 +102,8 @@ def scrape(idx_start:int, idx_end:int, DAR_PATH:str='DAR_joined.csv', debug=Fals
         VUR_edit[col] = VUR_edit[col].astype(dtype)
     VUR_edit.to_csv(output_file,index=False, header=True, sep=';')
 
-#scrape(r'C:\Users\Long\Desktop\Python Vault\repos\02807-Project\DAR_joined.csv',0,2,True)
-#scrape(1123328,1123332,r'C:\Users\Long\Desktop\Python Vault\repos\02807-Project\DAR_joined.csv') #Solbakkevej 68 included - test
-
+# Examples
+#scrape(1123328,1123332,r'<path_to>\DAR_joined.csv') #Solbakkevej 68 included - test
 #scrape(5587,5600)
-scrape(*map(int,sys.argv[1:3]),*sys.argv[3:5]) # Run it from command line (easier like this for HPC)
+
+scrape(*map(int,sys.argv[1:3]),*sys.argv[3:5]) # Run it CL (easier like this for HPC)
