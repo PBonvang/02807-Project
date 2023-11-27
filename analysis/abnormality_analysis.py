@@ -25,7 +25,7 @@ clusterings = np.load('../data/clusterings/DBSCAN_clusterings_minmax_eps1_1_ms11
 sys.stdout.write('[Loading clusterings] Done\n')
 # %% Hyperparameters
 K = 100
-T = 10/100
+T = 1/100
 reference_dist = norm()
 # %% Abnormality analysis
 def check_outlier_abnormality(row, NN_model, evaluations):
@@ -37,11 +37,8 @@ def check_outlier_abnormality(row, NN_model, evaluations):
 
     return 0 if p > T else 1
 
-def check_abnormality(row, evaluations, cluster_mean, cluster_std, cluster_size):
+def check_abnormality(row, evaluations):
     evaluations = evaluations[evaluations.index != row.name]
-    # mu = (cluster_mean-row[PREDICTION_VAR])/(cluster_size - 1)
-    return int((evaluations.std()-cluster_std)/cluster_std > T)
-
     tobs = (row[PREDICTION_VAR] - evaluations.mean())/(evaluations.std())
     p = (1 - reference_dist.cdf(abs(tobs)))
 
@@ -59,9 +56,7 @@ for cluster_id in tqdm(cluster_ids):
         # cluster_NN = NearestNeighbors(n_neighbors=K+1).fit(feature_data) # K+1 because it will find itself
         # cluster['isAbnormal'] = cluster.progress_apply(lambda row: check_outlier_abnormality(row, cluster_NN, evaluations), axis=1)
     else:
-        c_mean = cluster[PREDICTION_VAR].mean()
-        c_std = cluster[PREDICTION_VAR].std()
-        cluster['isAbnormal'] = cluster.progress_apply(lambda row: check_abnormality(row, cluster[PREDICTION_VAR],c_mean,c_std,len(cluster)), axis=1)
+        cluster['isAbnormal'] = cluster.progress_apply(lambda row: check_abnormality(row, cluster[PREDICTION_VAR]), axis=1)
 
     abnormality_ds = pd.concat([abnormality_ds, cluster])
 # %% Save abnormality
