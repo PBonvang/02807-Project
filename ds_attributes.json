@@ -1,6 +1,7 @@
 {
-    "adressId": GUID # aka. adgangsAdresseID(VUR), husnummer_id(BBR,DAR),
+    "id": GUID # aka. adgangsAdresseID(VUR), husnummer_id(BBR,DAR),
     "postal_nr": str # DAR,
+    "address": str # DAR,
     "evaluationYear": int # VUR,
     "propertyValue": float # VUR,
     "groundValue": float # VUR, 
@@ -40,4 +41,6 @@
     "stormCouncilsFloodSelfRisk": one hot encoded # aka. byg111StormrådetsOversvømmelsesSelvrisiko (BBR) - code list is OversvømmelsesSelvrisiko,
     "areaOfExternalInsulation": float # aka. byg130ArealAfUdvendigEfterisolering (BBR),
     "locationOnLakeTerritory": bool # aka. byg136PlaceringPåSøterritorie (BBR),
+    "totalAddressValue": float # sum of propertyValue and groundValue,
+    "region": int # first digit of postal_nr
 }
