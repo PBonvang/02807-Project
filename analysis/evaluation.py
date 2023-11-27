@@ -21,12 +21,15 @@ feature_names = ds.columns[ds.columns != PREDICTION_VAR]
 seed = 42
 T = 1/100
 reference_dist = norm()
+multipliers = [1/2,2]
+N = 1000
+K = 5
 ############################################################
 # Creating test dataset
 ############################################################
 # %% Get normal obs and change their evaluation
-normal_obs = ds.loc[ds['isAbnormal'] == 0].sample(frac=1/10, random_state=seed).copy()
-normal_obs['multiplier'] = np.random.choice([-2,2], len(normal_obs), replace=True)
+normal_obs = ds.loc[ds['isAbnormal'] == 0].sample(n=N//2, random_state=seed).copy()
+normal_obs['multiplier'] = np.random.choice(multipliers, len(normal_obs), replace=True)
 normal_obs[PREDICTION_VAR] = normal_obs[PREDICTION_VAR]*normal_obs['multiplier']
 normal_obs['label'] = 1
 normal_obs
@@ -34,12 +37,11 @@ normal_obs
 # %% Get abnormal ones and change evaluation to the average of the K nearest normal ones to check if it will make it normal
 def get_average_of_normal_KNN(abnormal_row, NN_model: NearestNeighbors, evaluations: pd.Series):
     distances, indicies = NN_model.kneighbors(abnormal_row[feature_names].to_numpy().reshape(1, -1))
-    nearest_neighbor_evaluations = evaluations[indicies[0][1:]]
+    NN_evaluations = evaluations[indicies[0][1:]]
     
-    return nearest_neighbor_evaluations.mean()
+    return NN_evaluations.mean()
 
-abnormal_obs = ds.loc[(ds['isAbnormal'] == 1) & (ds['cluster'] != -1)].sample(frac=1/10, random_state=seed).copy()
-K = 5
+abnormal_obs = ds.loc[(ds['isAbnormal'] == 1) & (ds['cluster'] != -1)].sample(n=N//2, random_state=seed).copy()
 for cluster_id in tqdm(abnormal_obs['cluster'].unique()):
     norm_cluster = ds.loc[(ds['cluster'] == cluster_id) & (ds['isAbnormal'] == 0)]
     abnorm_mask = abnormal_obs['cluster'] == cluster_id
@@ -64,8 +66,8 @@ for cluster_id in tqdm(ds_test['cluster'].unique()):
 
     test_cluster_mask = ds_test['cluster'] == cluster_id
     test_cluster = ds_test.loc[test_cluster_mask]
-    zs = (test_cluster[PREDICTION_VAR] - cluster_evals.mean())/cluster_evals.std()
-    ps = 1 - reference_dist.cdf(np.abs(zs))
+    zs = (test_cluster[PREDICTION_VAR] - cluster_evals.mean())/(cluster_evals.std())
+    ps = (1 - reference_dist.cdf(np.abs(zs)))
 
     ds_test.loc[test_cluster_mask,'prediction'] = (ps<T).astype(int)
 
@@ -73,7 +75,5 @@ ds_test
 
 # %% Evaluation
 print(confusion_matrix(ds_test['label'], ds_test['prediction'], normalize='true'))
-
-t = ds_test.loc[ds_test['label'] == 1]
-(t['label'] == t['prediction']).sum()/len(t)
+(ds_test['label'] == ds_test['prediction']).mean()
 # %%
