@@ -1,0 +1,19 @@
+TY  - JOUR
+AU  - Sander, Jörg
+AU  - Ester, Martin
+AU  - Kriegel, Hans-Peter
+AU  - Xu, Xiaowei
+PY  - 1998
+DA  - 1998/06/01
+TI  - Density-Based Clustering in Spatial Databases: The Algorithm GDBSCAN and Its Applications
+JO  - Data Mining and Knowledge Discovery
+SP  - 169
+EP  - 194
+VL  - 2
+IS  - 2
+AB  - The clustering algorithm DBSCAN relies on a density-based notion of clusters and is designed to discover clusters of arbitrary shape as well as to distinguish noise. In this paper, we generalize this algorithm in two important directions. The generalized algorithm—called GDBSCAN—can cluster point objects as well as spatially extended objects according to both, their spatial and their nonspatial attributes. In addition, four applications using 2D points (astronomy), 3D points (biology), 5D points (earth science) and 2D polygons (geography) are presented, demonstrating the applicability of GDBSCAN to real-world problems.
+SN  - 1573-756X
+UR  - https://doi.org/10.1023/A:1009745219419
+DO  - 10.1023/A:1009745219419
+ID  - Sander1998
+ER  - 
