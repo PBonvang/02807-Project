@@ -6,8 +6,8 @@
 
 **Code lists for one hot encoded properties:** https://teknik.bbr.dk/kodelister
 
-**VUR**
-VUR data is scraped with
+**VUR** 
+data is scraped with
 ```py
 python Utils/Data/scrape.py 0 2259957
 ```
