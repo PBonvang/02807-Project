@@ -2,7 +2,8 @@
 
 ## Datasets
 
-**Preprocessed DAR:** https://wetransfer.com/downloads/c1dce7caf5280f6964cf43d4bc40365d20231117090650/8fa5036d6cbe9e41af7385b1f38314c220231117090702/9dda2e?trk=TRN_TDL_01&utm_campaign=TRN_TDL_01&utm_medium=email&utm_source=sendgrid
+All data can be found at: [https://drive.proton.me/urls/89G58EHFV4#8H7CXNedYN7k](https://drive.proton.me/urls/89G58EHFV4#8H7CXNedYN7k)
+You may contact s214606@dtu.dk if the link is locked
 
 **Code lists for one hot encoded properties:** https://teknik.bbr.dk/kodelister
 
@@ -11,10 +12,6 @@ data is scraped with
 ```py
 python Utils/Data/scrape.py 0 2259957
 ```
-
-All data can be found at: [https://drive.proton.me/urls/89G58EHFV4#8H7CXNedYN7k](https://drive.proton.me/urls/89G58EHFV4#8H7CXNedYN7k)
-
-You may contact s214606@dtu.dk if the link is locked
 
 ## Requirements
 **Problem:**
