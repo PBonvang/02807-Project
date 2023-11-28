@@ -12,6 +12,10 @@ data is scraped with
 python Utils/Data/scrape.py 0 2259957
 ```
 
+All data can be found at: [https://drive.proton.me/urls/89G58EHFV4#8H7CXNedYN7k](https://drive.proton.me/urls/89G58EHFV4#8H7CXNedYN7k)
+
+You may contact s214606@dtu.dk if the link is locked
+
 ## Requirements
 **Problem:**
 - Must use at least one, and preferably two of the topics we have discussed during the course.
